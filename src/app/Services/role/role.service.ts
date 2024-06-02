@@ -24,11 +24,9 @@ export class RoleService {
       headers: this.jwtService.getHeader()
     };
     const apiUrl = 'https://localhost:7195/api/Role/update';
-    return this.http.post<any>(apiUrl,
-      roleData,
-      httpOptions
-    );
+    return this.http.put<any>(apiUrl, roleData, httpOptions);
   }
+  
   DeleteRole(roleId: number) {
     const url = `https://localhost:7195/api/Role/delete/${roleId}`;
     const httpOptions = {
