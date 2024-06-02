@@ -1,0 +1,106 @@
+<app-sidebar>
+    <mat-card class="cardWithShadow">
+        <mat-card-content class="p-20">
+            <mat-card-title class="pb-3 f-s-14 header-title text-nowrap">Role Management</mat-card-title>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+                <div></div>
+                <div>
+                    <button mat-raised-button class="me-2 text-white" style="background:#3e76cb ;"
+                        (click)="toggleOffcanvasRight()">
+                        Add Role
+                    </button>
+                    <button mat-raised-button (click)="ExportToExcel()" style="background: #009952;"
+                        class="me-2 text-white">
+                        Export to Excel
+                    </button>
+                    <button mat-raised-button (click)="ExportToPDF()" color="warn">
+                        Export to PDF
+                    </button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="cardWithShadow mt-5">
+        <mat-card-content class="p-24">
+            <div class="table-responsive">
+                <table mat-table class="w-100" [dataSource]="dataSource">
+
+                    <ng-container matColumnDef="Name">
+                        <th mat-header-cell *matHeaderCellDef class="fs-6 f-w-600 text-noWrap" mat-sort-header>Name
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="fs-6">
+
+                            {{element.name
+                            }}
+                        </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="Action">
+                        <th mat-header-cell *matHeaderCellDef class="fs-6 f-w-600">
+                            Action
+                        </th>
+                        <td mat-cell *matCellDef="let element" class="action-link">
+                            <a class="m-r-10 cursor-pointer rounded-sm bg-light-gray custom-btn me-3 fs-6 pointer">
+                                <!-- <i-tabler name="edit" class="icon-18" (click)="openUpdateOffCanvas(element)"></i-tabler> -->
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <a class="m-r-10 cursor-pointer rounded-sm bg-light-gray custom-btn fs-6 pointer">
+                                <!-- <i-tabler name="trash" (click)="openDeleteDialog(element?._id)" class="icon-18"></i-tabler> -->
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+
+                        </td>
+                    </ng-container>
+
+
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                </table>
+
+            </div>
+
+
+        </mat-card-content>
+    </mat-card>
+
+    <div class="offcanvas-overlay" *ngIf="isOffcanvasRightOpen || isOffcanvasUpdateOpen"></div>
+
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"
+        [class.show]="isOffcanvasRightOpen">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">Add Role</h5>
+            <button class="close-btn" (click)="closeOffcanvas()"><i class="fas fa-times f-s-30"></i></button>
+        </div>
+        <div class="offcanvas-body">
+            <form [formGroup]="AddRoleForm" (ngSubmit)="onSubmitAdd()">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name">
+
+                </mat-form-field>
+
+                <button mat-raised-button type="submit" color="primary" class="w-100">Save</button>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasUpdate" aria-labelledby="offcanvasUpdate"
+        [class.show]="isOffcanvasUpdateOpen">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasUpdate" class="fs-custom">Update Role</h5>
+            <button class="close-btn" (click)="closeOffcanvasUpdate()"><i class="fas fa-times f-s-30"></i></button>
+
+        </div>
+
+        <div class="offcanvas-body">
+            <form [formGroup]="UpdateRoleForm" (ngSubmit)="onSubmitUpadte()">
+
+            </form>
+        </div>
+    </div> -->
+</app-sidebar>

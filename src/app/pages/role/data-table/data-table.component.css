@@ -1,0 +1,62 @@
+.header-title {
+    color: #024a87;
+  }
+  
+  .custom-btn {
+    background: #f5f2f2;
+    border-radius: .25rem;
+    padding: .15rem;
+  }
+  
+ 
+  
+  .bg-pdf {
+    background-color: #f45d5d;
+
+  }
+  
+  .text-custom-success {
+    color: rgb(17, 190, 17);
+  
+  }
+  
+  
+
+  .pointer{
+    cursor: pointer;
+  }
+  
+  .offcanvas-header h5 {
+    padding: 12px 0;
+    font-size: 1.3rem;
+  }
+  
+  .offcanvas.offcanvas-end {
+    width: 500px !important;
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  
+  
+  .offcanvas-header .close-btn {
+    margin: calc(-0.5 * 1rem) calc(-0.2 * 1rem) calc(-0.5 * 1rem) auto;
+    font-size: 25px;
+    transition: transform 0.3s linear;
+    background: none;
+    border: none;
+    color: #d80404;
+  }
+  
+  .close-btn:hover {
+    color: #fb8787;
+    transform: rotate(180deg);
+  }
+  
+  .offcanvas-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+  }

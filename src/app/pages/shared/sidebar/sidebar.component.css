@@ -1,0 +1,13 @@
+.bg-custom-primary{
+    background-color: #3f51b5;
+  }
+  .f-w-600{
+    font-weight: 600;
+  }
+  .f-s-3r{
+    font-size: 3rem;
+  
+  }
+  .pointer{
+    cursor: pointer;
+  }

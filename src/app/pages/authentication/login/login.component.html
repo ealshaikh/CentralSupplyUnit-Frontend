@@ -1,0 +1,61 @@
+<div class="w-100 h-100 p-0">
+  <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff"
+    type="ball-fussion">
+    <p class="text-white font">Signing in</p>
+  </ngx-spinner>
+
+  <div class="row h-100 w-100 p-0 m-0">
+
+    <div class="col-md-5 d-flex justify-content-center align-items-center h-100 p-3 flex-column">
+      <div class="row">
+        <img src="../../../../assets/images/logo.png" alt="logo"
+          class="img-fluid position-absolute top-0 start-0"
+          style="width: 200px;" />
+
+      </div>
+      <div class="row w-100 form-container">
+        <form [formGroup]="Loginform" (ngSubmit)="onSubmit()">
+
+          <mat-form-field appearance="fill" class="w-100 mb-3 d-block"
+            color="primary">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email"
+              placeholder="Ex@example.com">
+            <mat-error *ngIf="Loginform.controls.email.hasError('email')">
+              Invalid email format
+            </mat-error>
+            <mat-error *ngIf="Loginform.controls.email.hasError('required')">
+              Email is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="w-100" color="primary">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password"
+              [type]="hide ? 'password' : 'text'" />
+            <button mat-icon-button matSuffix type="button"
+              (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="Loginform.get('password')?.errors?.['required']">
+              Password is required
+            </mat-error>
+            <mat-error *ngIf="Loginform.get('password')?.errors?.['minlength']">
+              Password must be at least 6 characters
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-flat-button color="primary" class="w-100"
+            [disabled]="!Loginform.valid">Log In</button>
+
+        </form>
+      </div>
+    </div>
+
+    <div
+      class="col-md-7 background-image">
+    </div>
+
+  </div>
+</div>

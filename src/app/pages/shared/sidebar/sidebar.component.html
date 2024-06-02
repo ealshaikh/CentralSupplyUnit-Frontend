@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-custom-primary">
+      <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+          <span class="fs-2 d-none d-sm-inline f-w-600">CSU</span>
+        </a>
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start " id="menu">
+          <li class="nav-item pb-2">
+            <a [routerLink]="['/dashboard']" class="nav-link align-middle px-0">
+              <i class="fa-solid fa-house text-white"></i> <span
+                class="ms-1 d-none d-sm-inline text-white px-2">dashboard</span>
+            </a>
+          </li>
+
+          <li class="pb-2">
+            <a class="nav-link px-0 align-middle pointer" (click)="navigateRole()">
+              <i class="fa-solid fa-bars-progress  text-white"></i><span
+                class="ms-1 d-none d-sm-inline text-white px-2">Role</span></a>
+          </li>
+
+          <li class="pb-2">
+            <a class="nav-link px-0 align-middle pointer">
+              <i class="fa-solid fa-people-roof text-white"></i> <span
+                class="ms-1 d-none d-sm-inline text-white px-2">User</span> </a>
+          </li>
+
+          <li class="pb-2">
+            <a class="nav-link px-0 align-middle pointer">
+              <i class="fa-solid fa-warehouse text-white"></i> <span
+                class="ms-1 d-none d-sm-inline text-white px-2">Warehouse</span></a>
+          </li>
+
+          <li class="pb-2">
+            <a class="nav-link px-0 align-middle pointer">
+              <i class="fa-solid fa-bag-shopping text-white"></i> <span
+                class="ms-1 d-none d-sm-inline text-white px-2">Items</span></a>
+          </li>
+
+          <li class="pb-2">
+            <a class="nav-link px-0 align-middle pointer">
+              <i class="fa-solid fa-file text-white"></i> <span class="ms-1 d-none d-sm-inline text-white px-2">Supply
+                Document</span></a>
+          </li>
+        </ul>
+        <div class="dropdown pb-4">
+          <a class="d-flex align-items-center text-white text-decoration-none pointer" (click)="logout()">
+            <i class="fa-solid fa-right-from-bracket text-white"></i>
+
+            <span class="ms-1 d-none d-sm-inline text-white px-2">Logout
+            </span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+    <div class="col py-3">
+      <ng-content></ng-content>
+
+    </div>
+
+  </div>
+</div>
