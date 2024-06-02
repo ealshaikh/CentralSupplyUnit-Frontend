@@ -10,11 +10,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { DeleteRoleComponent } from './delete-role/delete-role.component';
 
 
 @NgModule({
   declarations: [
-    DataTableComponent
+    DataTableComponent,
+    DeleteRoleComponent
   ],
   imports: [
     CommonModule,

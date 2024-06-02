@@ -1,0 +1,44 @@
+.action-button {
+    background: #df0202;
+    color: white;
+    margin-right: 1rem;
+    border: none;
+    padding: 7px;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    width: 70px;
+}
+
+.cancel-button {
+    background: #8c8282;
+    color: #fff;
+    margin-right: 1rem;
+    border: none;
+    padding: 7px;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    width: 70px;
+
+}
+
+.custom-header {
+    font-size: 22px;
+    padding-top: 1.5rem;
+    padding-left: 2rem;
+}
+
+.custom-content {
+    padding-left: 2rem;
+}
+
+.custom-action {
+    padding-left: 2rem;
+    padding-top: 1.5rem;
+}
+
+.action-button:hover,
+.cancel-button:hover {
+    border: #000 1px solid;
+}

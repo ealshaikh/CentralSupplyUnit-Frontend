@@ -34,9 +34,9 @@ export class RoleService {
     const httpOptions = {
       headers: this.jwtService.getHeader()
     };
-    return this.http.post(url, { id: roleId }, httpOptions)
-
+    return this.http.delete(url, httpOptions);
   }
+  
   GetAllRoles() {
     const headers = this.jwtService.getHeader();
     const apiUrl = 'https://localhost:7195/api/Role/list';

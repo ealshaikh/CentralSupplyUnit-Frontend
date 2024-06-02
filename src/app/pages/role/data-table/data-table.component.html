@@ -37,6 +37,7 @@
                     </ng-container>
 
 
+
                     <ng-container matColumnDef="Action">
                         <th mat-header-cell *matHeaderCellDef class="fs-6 f-w-600">
                             Action
@@ -46,7 +47,7 @@
                                 <!-- <i-tabler name="edit" class="icon-18" (click)="openUpdateOffCanvas(element)"></i-tabler> -->
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                            <a class="m-r-10 cursor-pointer rounded-sm bg-light-gray custom-btn fs-6 pointer">
+                            <a class="m-r-10 cursor-pointer rounded-sm bg-light-gray custom-btn fs-6 pointer" (click)="openDeleteDialog(element?.roleid)">
                                 <!-- <i-tabler name="trash" (click)="openDeleteDialog(element?._id)" class="icon-18"></i-tabler> -->
                                 <i class="fa-solid fa-trash"></i>
                             </a>
