@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-error',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class ErrorComponent {
 
+  constructor(private router :Router){}
+  navigateHome(){
+    this.router.navigate(['dashboard'])
+  }
 }
