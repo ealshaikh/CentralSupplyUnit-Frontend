@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import { Subscription, timeout } from 'rxjs';
 import { RoleService } from 'src/app/Services/role/role.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import * as XLSX from 'xlsx';
@@ -19,6 +19,7 @@ import { UserService } from 'src/app/Services/user/user.service';
 export class DataTableComponent implements OnInit, OnDestroy {
   @ViewChild('addDialogContent') addDialogContent!: TemplateRef<any>;
   @ViewChild('updateDialogContent') updateDialogContent!: TemplateRef<any>;
+  @ViewChild('deleteDialogContent') deleteDialogContent!: TemplateRef<any>;
 
   dialogRef!: MatDialogRef<any>;
 
@@ -124,10 +125,9 @@ export class DataTableComponent implements OnInit, OnDestroy {
       width: '560px',
       height: '530px',
     });
-    console.log
 
     this.UpdateUserForm.patchValue({
-      userid:element.userid,
+      userid: element.userid,
       firstname: element.firstname,
       lastname: element.lastname,
       email: element.email,
@@ -139,9 +139,47 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
     });
   }
+  openDeleteDialog(id: number): void {
+    this.dialogRef = this.dialog.open(this.deleteDialogContent, {
+      width: '360px',
+      height: '180px',
+    });
+
+    this.dialogRef.afterClosed().subscribe((result) => {
+      if (result && result.event === 'Delete') {
+        this.deleteUser(id);
+      }
+    });
+  }
+
+  deleteUser(id: number): void {
+    this._userService.DeleteUser(id).subscribe(
+      (response) => {
+        this._toaster.success('User Deleted Successfully', 'Success');
+        setTimeout(() => {}, 2000);
+        this.fetchUsers();
+      },
+      (error) => {
+        this._toaster.error('An error occurred while deleting the user', 'Error');
+        setTimeout(() => {}, 2000);
+      }
+    );
+  }
+
+  closeDialog(): void {
+    if (this.dialogRef) {
+      this.dialogRef.close({ event: 'Cancel' });
+    }
+  }
+
+  confirmDelete(): void {
+    if (this.dialogRef) {
+      this.dialogRef.close({ event: 'Delete' });
+    }
+  }
+
 
   onSubmitAdd() {
-    console.log(this.AddUserForm.value)
     if (this.AddUserForm.valid) {
       const newRole: any = {
         firstname: this.AddUserForm.value.firstname!,
@@ -214,7 +252,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
     const fileName = 'User_Report.xlsx';
 
     const filteredData = this.userData.map(user => ({
-      'Full Name': user.firstname+' '+user.lastname,
+      'Full Name': user.firstname + ' ' + user.lastname,
       'User Name': user.username,
       'Email': user.email,
       'Role Name': user.roleName
@@ -236,7 +274,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
       ],
       ...this.userData.map((row: any) => [
-        { text: row.firstname +' '+row.lastname },
+        { text: row.firstname + ' ' + row.lastname },
         { text: row.username },
         { text: row.roleName },
         { text: row.email },

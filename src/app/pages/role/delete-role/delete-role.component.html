@@ -1,8 +1,9 @@
-<h2 mat-dialog-title class="custom-header">Delete Role</h2>
-<div mat-dialog-content class="custom-content">
+<h2 mat-dialog-title class="py-3 fs-5 ml-5">Delete Role</h2>
+<div mat-dialog-content class="text-center pb-2">
     Would you like to delete this Role?
 </div>
-<div mat-dialog-actions class="custom-action">
-    <button mat-button mat-dialog-close cdkFocusInitial class="action-button" (click)="confirmDelete()">Delete</button>
-    <button mat-button (click)="closeDialog()" class="cancel-button">Cancel</button>
+<div mat-dialog-actions class="ml-5 py-2">
+    <button mat-button class="delete-button bg-danger text-white me-3" (click)="confirmDelete()">Delete</button>
+    <button mat-button class="cancel-button bg-secondary text-white" (click)="closeDialog()" >Cancel</button>
+
 </div>

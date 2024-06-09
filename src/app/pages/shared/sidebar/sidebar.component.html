@@ -7,9 +7,10 @@
         </a>
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start " id="menu">
 
-          <li *ngIf="roleId == 1" class="p-3" style="border: 2px dashed red;">
+          <li [ngClass]="{'p-3': true, 'border': true, 'border-danger': roleId == 1}">
             Admin
-          </li>
+        </li>
+        
           <li *ngIf="roleId == 2" class="p-3" style="border: 2px dashed red;">
             <i class="fa-solid fa-user text-white"></i>
              Manager
