@@ -6,12 +6,12 @@ import { LoginService } from '../Services/login/login.service';
   providedIn: 'root'
 })
 
-export class AdminRoleGuard implements CanActivate {
+export class ManagerRoleGuard implements CanActivate {
   constructor(private router: Router,private authService: LoginService) {}
 
   canActivate(): boolean {
     const roleId = this.authService.getRoleId();
-    if (roleId == 1) {
+    if (roleId == 2 || roleId ==1) {
       return true;
     } else {
       this.router.navigate(['**']); 

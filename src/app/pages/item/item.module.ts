@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SupplyDocumentRoutingModule } from './supply-document-routing.module';
+import { ItemRoutingModule } from './item-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { DataTableComponent } from './data-table/data-table.component';
 import { MaterialModule } from 'src/app/material.module';
@@ -13,9 +13,9 @@ import { MaterialModule } from 'src/app/material.module';
   ],
   imports: [
     CommonModule,
-    SupplyDocumentRoutingModule,
+    ItemRoutingModule,
     SharedModule,
     MaterialModule
   ]
 })
-export class SupplyDocumentModule { }
+export class ItemModule { }

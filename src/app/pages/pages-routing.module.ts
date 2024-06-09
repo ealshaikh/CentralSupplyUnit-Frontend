@@ -2,7 +2,8 @@ import { RoleModule } from './role/role.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StarterComponent } from './starter/starter.component';
-import { AdminRolehGuard } from '../Guards/adminRole.guard';
+import { AdminRoleGuard } from '../Guards/adminRole.guard';
+import { ManagerRoleGuard } from '../Guards/manager.guard';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
   },
   {
     path:'warehouse',
+    canActivate:[ManagerRoleGuard],
     loadChildren: () => import ('./warehouse/warehouse.module').then((m) => m.WarehouseModule)
   },
   {
@@ -19,14 +21,19 @@ const routes: Routes = [
   },
   {
     path:'user',
-    canActivate: [AdminRolehGuard],
+    canActivate: [AdminRoleGuard],
     loadChildren: () => import ('./user/user.module').then((m) => m.UserModule)
   }
   ,
   {
     path:'role',
-    canActivate: [AdminRolehGuard],
+    canActivate: [AdminRoleGuard],
     loadChildren: () => import ('./role/role.module').then((m) => m.RoleModule)
+  },
+  {
+    path:'item',
+    canActivate:[ManagerRoleGuard],
+    loadChildren: () => import ('./item/item.module').then((m) => m.ItemModule)
   }
 ];
 
