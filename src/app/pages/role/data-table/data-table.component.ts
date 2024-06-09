@@ -17,16 +17,15 @@ import { TDocumentDefinitions, TableCell } from 'pdfmake/interfaces';
   styleUrls: ['./data-table.component.css']
 })
 export class DataTableComponent implements OnInit, OnDestroy {
+  roleSubscription!: Subscription;
+  isOffcanvasRightOpen = false;
+  isOffcanvasUpdateOpen = false;
+  roleData: any[] = [];
   displayedColumns: string[] = [
     'Name',
     'Action',
   ];
-  isOffcanvasRightOpen = false;
-  isOffcanvasUpdateOpen = false;
-  roleSubscription!: Subscription;
-  dataSource = new MatTableDataSource<any>([]);
-  roleData: any[] = [];
-
+  
   AddRoleForm = new FormGroup({
     name: new FormControl('', [Validators.required])
 
@@ -38,7 +37,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   });
 
-  constructor(private _roleService: RoleService, private _toastr: ToastrService, public dialog: MatDialog,
+  constructor(private _roleService: RoleService, private _toaster: ToastrService, public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -54,19 +53,16 @@ export class DataTableComponent implements OnInit, OnDestroy {
   fetchRoles() {
     this._roleService.GetAllRoles().subscribe(
       (response: any) => {
-        if (response && response.roles) {
-          this.roleData = response.roles;
-          this.dataSource.data = this.roleData;
+        if (response) {
+          this.roleData = response.roles.filter((role: any) => role.roleid !== 1);
         } else {
           console.error('Error: Role data is empty or not in the expected format');
           this.roleData = [];
-          this.dataSource.data = this.roleData;
         }
       },
       (error: any) => {
         console.error('Error fetching roles:', error);
         this.roleData = [];
-        this.dataSource.data = this.roleData;
       }
     );
   }
@@ -84,17 +80,17 @@ export class DataTableComponent implements OnInit, OnDestroy {
   onSubmitAdd() {
     if (this.AddRoleForm.valid) {
       const newRole: any = {
-        name: String(this.AddRoleForm.value.name)
+        name: this.AddRoleForm.value.name!
       }
       this._roleService.CreateRole(newRole).subscribe(
         (response: any) => {
-          this._toastr.success('Role created successfully', 'Success', { timeOut: 3000 });
+          this._toaster.success('Role created successfully', 'Success', { timeOut: 3000 });
           this.closeOffcanvas();
           this.fetchRoles();
 
         },
         (error) => {
-          this._toastr.error('Error creating new role, please try again!', 'Error', { timeOut: 3000 });
+          this._toaster.error('Error creating new role, please try again!', 'Error', { timeOut: 3000 });
 
         }
       )
@@ -116,7 +112,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
         .UpdateRole(this.UpdateRoleForm.value)
         .subscribe(
           (response: any) => {
-            this._toastr.success(
+            this._toaster.success(
               'Role updated successfully',
               'Success',
               {
@@ -129,7 +125,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
           },
           (error) => {
-            this._toastr.error(
+            this._toaster.error(
               'Something went wrong, please try again later!',
               'Error',
               {
@@ -175,12 +171,15 @@ export class DataTableComponent implements OnInit, OnDestroy {
     ];
 
     const documentDefinition: TDocumentDefinitions = {
+
+      
       content: [
         {
           table: {
-
             headerRows: 1,
             body: tableBody,
+
+            
           },
         },
       ],
@@ -215,13 +214,13 @@ export class DataTableComponent implements OnInit, OnDestroy {
   deleteRole(roleId: number): void {
     this._roleService.DeleteRole(roleId).subscribe(
       () => {
-        this._toastr.success('Role deleted successfully', 'Success', {
+        this._toaster.success('Role deleted successfully', 'Success', {
           timeOut: 3000,
         });
         this.fetchRoles();
       },
       (error) => {
-        this._toastr.error('Error deleting role', 'Error', { timeOut: 3000 });
+        this._toaster.error('Error deleting role', 'Error', { timeOut: 3000 });
       },
     );
   }
