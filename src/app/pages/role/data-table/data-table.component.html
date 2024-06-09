@@ -1,7 +1,7 @@
 <app-sidebar>
     <mat-card class="cardWithShadow">
         <mat-card-content class="p-20">
-            <mat-card-title class="pb-3 f-s-14 header-title text-nowrap">Role
+            <mat-card-title class="pb-3 f-s-14 header-title">Role
                 Management</mat-card-title>
             <div
                 class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
@@ -29,12 +29,12 @@
     <mat-card class="cardWithShadow mt-5">
         <mat-card-content class="p-24">
             <div class="table-responsive">
-                <table mat-table class="w-100" [dataSource]="dataSource">
+                <table mat-table [dataSource]="roleData">
 
                     <ng-container matColumnDef="Name">
                         <th mat-header-cell *matHeaderCellDef
-                            class="fs-6 f-w-600 text-noWrap"
-                            mat-sort-header>Name
+                            class="fs-6"
+                            >Name
                         </th>
                         <td mat-cell *matCellDef="let element" class="fs-6">
 
@@ -45,18 +45,18 @@
 
                     <ng-container matColumnDef="Action">
                         <th mat-header-cell *matHeaderCellDef
-                            class="fs-6 f-w-600">
+                            class="fs-6">
                             Action
                         </th>
                         <td mat-cell *matCellDef="let element"
                             class="action-link">
                             <a
-                                class="m-r-10 cursor-pointer rounded-sm bg-light-gray custom-btn me-3 fs-6 pointer"
+                                class="rounded-1 me-3 fs-6  pointer"
                                 (click)="openUpdateOffCanvas(element)">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                             <a
-                                class="m-r-10 cursor-pointer rounded-sm bg-light-gray custom-btn fs-6 pointer"
+                                class="rounded-1 fs-6 pointer  pointer"
                                 (click)="openDeleteDialog(element?.roleid)">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
@@ -81,7 +81,7 @@
         aria-labelledby="offcanvasRightLabel"
         [class.show]="isOffcanvasRightOpen">
         <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel">Add Role</h5>
+            <h5 id="offcanvasRightLabel" class="mb-0 py-3 fs-5">Add Role</h5>
             <button class="close-btn" (click)="closeOffcanvas()"><i
                     class="fas fa-times f-s-30"></i></button>
         </div>
@@ -104,7 +104,7 @@
         aria-labelledby="offcanvasUpdate"
         [class.show]="isOffcanvasUpdateOpen">
         <div class="offcanvas-header">
-            <h5 id="offcanvasUpdate" class="fs-custom">Update Role</h5>
+            <h5 id="offcanvasUpdate" class="mb-0 py-3 fs-5">Update Role</h5>
             <button class="close-btn" (click)="closeOffcanvasUpdate()"><i
                     class="fas fa-times f-s-30"></i></button>
 

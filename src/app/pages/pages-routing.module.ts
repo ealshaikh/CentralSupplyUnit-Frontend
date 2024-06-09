@@ -2,6 +2,7 @@ import { RoleModule } from './role/role.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StarterComponent } from './starter/starter.component';
+import { AdminRolehGuard } from '../Guards/adminRole.guard';
 
 const routes: Routes = [
   {
@@ -18,11 +19,13 @@ const routes: Routes = [
   },
   {
     path:'user',
+    canActivate: [AdminRolehGuard],
     loadChildren: () => import ('./user/user.module').then((m) => m.UserModule)
   }
   ,
   {
     path:'role',
+    canActivate: [AdminRolehGuard],
     loadChildren: () => import ('./role/role.module').then((m) => m.RoleModule)
   }
 ];

@@ -13,20 +13,20 @@
             </a>
           </li>
 
-          <li class="pb-2">
+          <li class="pb-2" *ngIf="roleId == 1">
             <a class="nav-link px-0 align-middle pointer" (click)="navigateRole()">
               <i class="fa-solid fa-bars-progress  text-white"></i><span
                 class="ms-1 d-none d-sm-inline text-white px-2">Role</span></a>
           </li>
 
-          <li class="pb-2">
-            <a class="nav-link px-0 align-middle pointer">
+          <li class="pb-2" *ngIf="roleId == 1">
+            <a class="nav-link px-0 align-middle pointer" (click)="navigateUser()">
               <i class="fa-solid fa-people-roof text-white"></i> <span
                 class="ms-1 d-none d-sm-inline text-white px-2">User</span> </a>
           </li>
 
           <li class="pb-2">
-            <a class="nav-link px-0 align-middle pointer">
+            <a class="nav-link px-0 align-middle pointer" (click)="navigateWarehouse()">
               <i class="fa-solid fa-warehouse text-white"></i> <span
                 class="ms-1 d-none d-sm-inline text-white px-2">Warehouse</span></a>
           </li>
