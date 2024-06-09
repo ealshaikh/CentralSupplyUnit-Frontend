@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +51,15 @@ export class LoginService {
       }
     }
     return throwError(errorMessage);
+  }
+
+
+  getRoleId(): number {
+    const token = localStorage.getItem('token'); 
+    if (token) {
+      const decoded: any = jwtDecode(token);
+      return decoded['Role Id'];
+    }
+    return 0;
   }
 }

@@ -11,9 +11,8 @@
   cursor: pointer;
 }
 
-.offcanvas-header h5 {
-  padding: 12px 0;
-  font-size: 1.3rem;
+.bg-light-gray {
+  background: rgb(231, 229, 229);
 }
 
 .offcanvas.offcanvas-end {
