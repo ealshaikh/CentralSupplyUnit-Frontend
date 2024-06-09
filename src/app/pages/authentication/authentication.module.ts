@@ -13,6 +13,7 @@ import { ErrorComponent } from './error/error.component';
   imports: [
     CommonModule,
     AuthenticationRoutingModule
+   
   ]
 })
 export class AuthenticationModule { }
