@@ -14,17 +14,17 @@
 
       </div>
       <div class="row w-100 form-container">
-        <form [formGroup]="Loginform" (ngSubmit)="onSubmit()">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
           <mat-form-field appearance="fill" class="w-100 mb-3 d-block"
             color="primary">
             <mat-label>Email</mat-label>
             <input type="email" matInput formControlName="email"
               placeholder="Ex@example.com">
-            <mat-error *ngIf="Loginform.controls.email.hasError('email')">
+            <mat-error *ngIf="loginForm.controls.email.hasError('email')">
               Invalid email format
             </mat-error>
-            <mat-error *ngIf="Loginform.controls.email.hasError('required')">
+            <mat-error *ngIf="loginForm.controls.email.hasError('required')">
               Email is required
             </mat-error>
           </mat-form-field>
@@ -38,16 +38,16 @@
               [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error *ngIf="Loginform.get('password')?.errors?.['required']">
+            <mat-error *ngIf="loginForm.get('password')?.errors?.['required']">
               Password is required
             </mat-error>
-            <mat-error *ngIf="Loginform.get('password')?.errors?.['minlength']">
+            <mat-error *ngIf="loginForm.get('password')?.errors?.['minlength']">
               Password must be at least 6 characters
             </mat-error>
           </mat-form-field>
 
           <button mat-flat-button color="primary" class="w-100"
-            [disabled]="!Loginform.valid">Log In</button>
+            [disabled]="!loginForm.valid">Log In</button>
 
         </form>
       </div>

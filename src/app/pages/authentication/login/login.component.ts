@@ -14,6 +14,8 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { loginCredentials } from 'src/app/Services/login/loginCredentials.interface';
 import { LoginService } from 'src/app/Services/login/login.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
@@ -23,14 +25,12 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [
     RouterModule,
-    MaterialModule,
-    NgIf,
-    FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
     MatInputModule,
     CommonModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatIconModule,
+    MatButtonModule
   ],
 })
 export class LoginComponent {
@@ -38,12 +38,12 @@ export class LoginComponent {
     private spinner: NgxSpinnerService,
     private loginService: LoginService,
     private router: Router,
-    private toastr: ToastrService
+    private toaster: ToastrService
   ) { }
 
   hide = true;
 
-  Loginform = new FormGroup({
+  loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
@@ -54,29 +54,35 @@ export class LoginComponent {
   onSubmit() {
     this.spinner.show();
 
-    if (this.Loginform.valid) {
+    if (this.loginForm.valid) {
       const loginCredentials: loginCredentials = {
-        email: this.Loginform.value.email!.toLowerCase(),
-        password: this.Loginform.value.password!
+        email: this.loginForm.value.email!.toLowerCase(),
+        password: this.loginForm.value.password!
       };
 
       this.loginService.login(loginCredentials).subscribe(
         result => {
           if (result) {
             const token = result.token;
-      
             localStorage.setItem('token', token);
-      
             this.router.navigate(['/dashboard']);
-            this.toastr.success('Login Successful. You are now logged in.', 'Success', { timeOut: 3000 });
+            this.toaster.success('Login Successful. You are now logged in.', 'Success', { timeOut: 3000 });
           }
+          this.spinner.hide();
         },
         error => {
-          console.error('Error occurred during login:', error);
+          if (error.status === 401) {
+            this.toaster.error('Check your credentials and try again.', 'Unauthorized', { timeOut: 3000 });
+          } else {
+            this.toaster.error('An unexpected error occurred. Please try again later.', 'Error', { timeOut: 3000 });
+          } this.spinner.hide();
         }
       );
-    }      
-
-    this.spinner.hide();
+    } else {
+      this.spinner.hide();
+    }
   }
+
+
+
 }
