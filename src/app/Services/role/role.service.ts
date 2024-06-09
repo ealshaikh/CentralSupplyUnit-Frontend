@@ -36,7 +36,7 @@ export class RoleService {
     };
     return this.http.post<any>(url, { id: roleId }, httpOptions);
   }
-
+   
   GetAllRoles(): Observable<any> {
     const headers = this.jwtService.getHeader();
     const apiUrl = `${environment.baseUrl}/${environment.endpoint}/${APP.ROLE.VIEW}`;
