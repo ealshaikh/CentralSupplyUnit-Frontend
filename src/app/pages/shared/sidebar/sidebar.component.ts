@@ -31,4 +31,12 @@ export class SidebarComponent implements OnInit{
     this.router.navigate(['dashboard/warehouse/data-table'])
 
   }
+  navigateItem(){
+    this.router.navigate(['dashboard/item/data-table'])
+
+  }
+  navigateSupplyDoc(){
+    this.router.navigate(['dashboard/supplyDocument/data-table'])
+
+  }
 }
